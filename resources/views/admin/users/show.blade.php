@@ -49,20 +49,28 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.approved') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $user->approved ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.user.fields.verified') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $user->verified ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <td>
                             @foreach($user->roles as $key => $roles)
                                 <span class="label label-info">{{ $roles->title }}</span>
                             @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.team') }}
-                        </th>
-                        <td>
-                            {{ App\User::TEAM_SELECT[$user->team] ?? '' }}
                         </td>
                     </tr>
                 </tbody>
@@ -76,30 +84,6 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.relatedData') }}
-    </div>
-    <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="#created_by_users" role="tab" data-toggle="tab">
-                {{ trans('cruds.user.title') }}
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#created_by_teams" role="tab" data-toggle="tab">
-                {{ trans('cruds.team.title') }}
-            </a>
-        </li>
-    </ul>
-    <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="created_by_users">
-            @includeIf('admin.users.relationships.createdByUsers', ['users' => $user->createdByUsers])
-        </div>
-        <div class="tab-pane" role="tabpanel" id="created_by_teams">
-            @includeIf('admin.users.relationships.createdByTeams', ['teams' => $user->createdByTeams])
-        </div>
-    </div>
-</div>
+
 
 @endsection

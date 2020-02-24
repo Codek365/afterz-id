@@ -11,6 +11,7 @@ use App\Http\Requests\StoreCrmDocumentRequest;
 use App\Http\Requests\UpdateCrmDocumentRequest;
 use Gate;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
 
 class CrmDocumentController extends Controller
@@ -41,6 +42,10 @@ class CrmDocumentController extends Controller
 
         if ($request->input('document_file', false)) {
             $crmDocument->addMedia(storage_path('tmp/uploads/' . $request->input('document_file')))->toMediaCollection('document_file');
+        }
+
+        if ($media = $request->input('ck-media', false)) {
+            Media::whereIn('id', $media)->update(['model_id' => $crmDocument->id]);
         }
 
         return redirect()->route('admin.crm-documents.index');
@@ -95,5 +100,17 @@ class CrmDocumentController extends Controller
         CrmDocument::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function storeCKEditorImages(Request $request)
+    {
+        abort_if(Gate::denies('crm_document_create') && Gate::denies('crm_document_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $model         = new CrmDocument();
+        $model->id     = $request->input('crud_id', 0);
+        $model->exists = true;
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media', 'public');
+
+        return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
 }

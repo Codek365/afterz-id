@@ -32,14 +32,11 @@ class CrmCustomer extends Model
         'description',
     ];
 
-    public function customerCrmNotes()
+    public static function boot()
     {
-        return $this->hasMany(CrmNote::class, 'customer_id', 'id');
-    }
+        parent::boot();
 
-    public function customerCrmDocuments()
-    {
-        return $this->hasMany(CrmDocument::class, 'customer_id', 'id');
+        CrmCustomer::observe(new \App\Observers\CrmCustomerActionObserver);
     }
 
     public function status()

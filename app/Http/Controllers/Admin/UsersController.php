@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -15,8 +16,12 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
+    use CsvImportTrait;
+
     public function index(Request $request)
     {
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         if ($request->ajax()) {
             $query = User::with(['roles', 'created_by'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
@@ -49,6 +54,12 @@ class UsersController extends Controller
                 return $row->email ? $row->email : "";
             });
 
+            $table->editColumn('approved', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->approved ? 'checked' : null) . '>';
+            });
+            $table->editColumn('verified', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->verified ? 'checked' : null) . '>';
+            });
             $table->editColumn('roles', function ($row) {
                 $labels = [];
 
@@ -58,11 +69,8 @@ class UsersController extends Controller
 
                 return implode(' ', $labels);
             });
-            $table->editColumn('team', function ($row) {
-                return $row->team ? $row->team : "";
-            });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles']);
+            $table->rawColumns(['actions', 'placeholder', 'approved', 'verified', 'roles']);
 
             return $table->make(true);
         }
@@ -110,7 +118,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'created_by', 'createdByUsers', 'createdByTeams');
+        $user->load('roles', 'created_by');
 
         return view('admin.users.show', compact('user'));
     }

@@ -17,8 +17,8 @@
                         <option value="{{ $id }}" {{ ($crmDocument->customer ? $crmDocument->customer->id : old('customer_id')) == $id ? 'selected' : '' }}>{{ $customer }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('customer_id'))
-                    <span class="text-danger">{{ $errors->first('customer_id') }}</span>
+                @if($errors->has('customer'))
+                    <span class="text-danger">{{ $errors->first('customer') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.crmDocument.fields.customer_helper') }}</span>
             </div>
