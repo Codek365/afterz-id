@@ -16,8 +16,10 @@ class TeamController extends Controller
 {
     public function index(Request $request)
     {
+        abort_if(Gate::denies('team_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         if ($request->ajax()) {
-            $query = Team::with(['created_by'])->select(sprintf('%s.*', (new Team)->table));
+            $query = Team::query()->select(sprintf('%s.*', (new Team)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -40,9 +42,6 @@ class TeamController extends Controller
 
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
-            });
-            $table->editColumn('team', function ($row) {
-                return $row->team ? $row->team : "";
             });
 
             $table->rawColumns(['actions', 'placeholder']);
@@ -71,8 +70,6 @@ class TeamController extends Controller
     {
         abort_if(Gate::denies('team_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $team->load('created_by');
-
         return view('admin.teams.edit', compact('team'));
     }
 
@@ -86,8 +83,6 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         abort_if(Gate::denies('team_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $team->load('created_by');
 
         return view('admin.teams.show', compact('team'));
     }

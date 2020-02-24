@@ -25,9 +25,6 @@
                         {{ trans('cruds.team.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.team.fields.team') }}
-                    </th>
-                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -84,7 +81,6 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'team', name: 'team' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
