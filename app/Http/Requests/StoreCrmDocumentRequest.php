@@ -21,11 +21,9 @@ class StoreCrmDocumentRequest extends FormRequest
         return [
             'customer_id'   => [
                 'required',
-                'integer',
-            ],
+                'integer'],
             'document_file' => [
-                'required',
-            ],
+                'required'],
         ];
     }
 }

@@ -23,14 +23,6 @@
                             {{ $team->id }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.team.fields.team') }}
-                        </th>
-                        <td>
-                            {{ $team->team }}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

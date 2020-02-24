@@ -20,8 +20,7 @@ class UpdateCrmStatusRequest extends FormRequest
     {
         return [
             'name' => [
-                'required',
-            ],
+                'required'],
         ];
     }
 }

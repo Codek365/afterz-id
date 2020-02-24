@@ -20,12 +20,10 @@ class UpdateCrmCustomerRequest extends FormRequest
     {
         return [
             'first_name' => [
-                'required',
-            ],
+                'required'],
             'status_id'  => [
                 'required',
-                'integer',
-            ],
+                'integer'],
         ];
     }
 }

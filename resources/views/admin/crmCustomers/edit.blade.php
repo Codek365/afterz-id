@@ -33,8 +33,8 @@
                         <option value="{{ $id }}" {{ ($crmCustomer->status ? $crmCustomer->status->id : old('status_id')) == $id ? 'selected' : '' }}>{{ $status }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('status_id'))
-                    <span class="text-danger">{{ $errors->first('status_id') }}</span>
+                @if($errors->has('status'))
+                    <span class="text-danger">{{ $errors->first('status') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.crmCustomer.fields.status_helper') }}</span>
             </div>

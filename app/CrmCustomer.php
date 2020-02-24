@@ -32,16 +32,6 @@ class CrmCustomer extends Model
         'description',
     ];
 
-    public function customerCrmNotes()
-    {
-        return $this->hasMany(CrmNote::class, 'customer_id', 'id');
-    }
-
-    public function customerCrmDocuments()
-    {
-        return $this->hasMany(CrmDocument::class, 'customer_id', 'id');
-    }
-
     public function status()
     {
         return $this->belongsTo(CrmStatus::class, 'status_id');

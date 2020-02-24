@@ -21,11 +21,9 @@ class UpdateCrmNoteRequest extends FormRequest
         return [
             'customer_id' => [
                 'required',
-                'integer',
-            ],
+                'integer'],
             'note'        => [
-                'required',
-            ],
+                'required'],
         ];
     }
 }

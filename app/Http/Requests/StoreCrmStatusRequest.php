@@ -20,8 +20,7 @@ class StoreCrmStatusRequest extends FormRequest
     {
         return [
             'name' => [
-                'required',
-            ],
+                'required'],
         ];
     }
 }
