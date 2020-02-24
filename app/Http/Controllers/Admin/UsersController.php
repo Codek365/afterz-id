@@ -17,8 +17,10 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         if ($request->ajax()) {
-            $query = User::with(['roles', 'created_by'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -49,6 +51,12 @@ class UsersController extends Controller
                 return $row->email ? $row->email : "";
             });
 
+            $table->editColumn('approved', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->approved ? 'checked' : null) . '>';
+            });
+            $table->editColumn('verified', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->verified ? 'checked' : null) . '>';
+            });
             $table->editColumn('roles', function ($row) {
                 $labels = [];
 
@@ -58,11 +66,8 @@ class UsersController extends Controller
 
                 return implode(' ', $labels);
             });
-            $table->editColumn('team', function ($row) {
-                return $row->team ? $row->team : "";
-            });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles']);
+            $table->rawColumns(['actions', 'placeholder', 'approved', 'verified', 'roles']);
 
             return $table->make(true);
         }
@@ -93,7 +98,7 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $user->load('roles', 'created_by');
+        $user->load('roles');
 
         return view('admin.users.edit', compact('roles', 'user'));
     }
@@ -110,7 +115,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'created_by', 'createdByUsers', 'createdByTeams');
+        $user->load('roles');
 
         return view('admin.users.show', compact('user'));
     }

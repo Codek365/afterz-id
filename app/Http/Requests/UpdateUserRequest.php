@@ -20,19 +20,15 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name'    => [
-                'required',
-            ],
+                'required'],
             'email'   => [
                 'required',
-                'unique:users,email,' . request()->route('user')->id,
-            ],
+                'unique:users,email,' . request()->route('user')->id],
             'roles.*' => [
-                'integer',
-            ],
+                'integer'],
             'roles'   => [
                 'required',
-                'array',
-            ],
+                'array'],
         ];
     }
 }

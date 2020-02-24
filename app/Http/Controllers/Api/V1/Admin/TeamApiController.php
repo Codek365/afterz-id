@@ -17,7 +17,7 @@ class TeamApiController extends Controller
     {
         abort_if(Gate::denies('team_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new TeamResource(Team::with(['created_by'])->get());
+        return new TeamResource(Team::all());
     }
 
     public function store(StoreTeamRequest $request)
@@ -33,7 +33,7 @@ class TeamApiController extends Controller
     {
         abort_if(Gate::denies('team_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new TeamResource($team->load(['created_by']));
+        return new TeamResource($team);
     }
 
     public function update(UpdateTeamRequest $request, Team $team)

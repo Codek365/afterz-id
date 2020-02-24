@@ -23,9 +23,4 @@ class CrmStatus extends Model
         'updated_at',
         'deleted_at',
     ];
-
-    public function statusCrmCustomers()
-    {
-        return $this->hasMany(CrmCustomer::class, 'status_id', 'id');
-    }
 }
