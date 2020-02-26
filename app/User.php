@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Notifications\VerifyUserNotification;
+use App\Traits\Auditable;
+use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -15,7 +17,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable, HasApiTokens;
+    use SoftDeletes, MultiTenantModelTrait, Notifiable, HasApiTokens, Auditable;
 
     public $table = 'users';
 
