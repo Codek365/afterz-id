@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Notifications\VerifyUserNotification;
-use App\Traits\Auditable;
 use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Hash;
@@ -17,7 +16,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, MultiTenantModelTrait, Notifiable, HasApiTokens, Auditable;
+    use SoftDeletes, MultiTenantModelTrait, Notifiable, HasApiTokens;
 
     public $table = 'users';
 
@@ -84,13 +83,6 @@ class User extends Authenticatable
                 $user->notify(new VerifyUserNotification($user));
             }
         });
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        User::observe(new \App\Observers\UserActionObserver);
     }
 
     public function getEmailVerifiedAtAttribute($value)
