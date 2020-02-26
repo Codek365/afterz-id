@@ -3,8 +3,6 @@
 namespace App;
 
 use App\Notifications\VerifyUserNotification;
-use App\Traits\Auditable;
-use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -17,7 +15,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, MultiTenantModelTrait, Notifiable, HasApiTokens, Auditable;
+    use SoftDeletes, Notifiable, HasApiTokens;
 
     public $table = 'users';
 
@@ -37,14 +35,14 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'team_id',
+        'password',
         'approved',
         'verified',
-        'password',
         'created_at',
         'updated_at',
         'deleted_at',
         'verified_at',
-        'created_by_id',
         'remember_token',
         'email_verified_at',
         'verification_token',
@@ -86,24 +84,11 @@ class User extends Authenticatable
         });
     }
 
-    public function assignedToAssets()
+    public static function boot()
     {
-        return $this->hasMany(Asset::class, 'assigned_to_id', 'id');
-    }
+        parent::boot();
 
-    public function assignedUserAssetsHistories()
-    {
-        return $this->hasMany(AssetsHistory::class, 'assigned_user_id', 'id');
-    }
-
-    public function createdByUsers()
-    {
-        return $this->hasMany(User::class, 'created_by_id', 'id');
-    }
-
-    public function userUserAlerts()
-    {
-        return $this->belongsToMany(UserAlert::class);
+        User::observe(new \App\Observers\UserActionObserver);
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -114,16 +99,6 @@ class User extends Authenticatable
     public function setEmailVerifiedAtAttribute($value)
     {
         $this->attributes['email_verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
-    }
-
-    public function getVerifiedAtAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
-    }
-
-    public function setVerifiedAtAttribute($value)
-    {
-        $this->attributes['verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
     public function setPasswordAttribute($input)
@@ -138,13 +113,23 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
+    public function getVerifiedAtAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setVerifiedAtAttribute($value)
+    {
+        $this->attributes['verified_at'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
-    public function created_by()
+    public function team()
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }

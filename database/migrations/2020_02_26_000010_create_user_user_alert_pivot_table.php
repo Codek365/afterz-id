@@ -10,9 +10,9 @@ class CreateUserUserAlertPivotTable extends Migration
     {
         Schema::create('user_user_alert', function (Blueprint $table) {
             $table->unsignedInteger('user_alert_id');
-            $table->foreign('user_alert_id', 'user_alert_id_fk_1045653')->references('id')->on('user_alerts')->onDelete('cascade');
+            $table->foreign('user_alert_id', 'user_alert_id_fk_1052525')->references('id')->on('user_alerts')->onDelete('cascade');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id', 'user_id_fk_1045653')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id', 'user_id_fk_1052525')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('read')->default(0);
         });
     }

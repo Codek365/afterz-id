@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Role;
+use App\Team;
 use App\User;
 use Gate;
 use Illuminate\Http\Request;
@@ -16,14 +16,12 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
-    use CsvImportTrait;
-
     public function index(Request $request)
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = User::with(['roles', 'created_by'])->select(sprintf('%s.*', (new User)->table));
+            $query = User::with(['roles', 'team'])->select(sprintf('%s.*', (new User)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -84,7 +82,9 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        return view('admin.users.create', compact('roles'));
+        $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.users.create', compact('roles', 'teams'));
     }
 
     public function store(StoreUserRequest $request)
@@ -101,9 +101,11 @@ class UsersController extends Controller
 
         $roles = Role::all()->pluck('title', 'id');
 
-        $user->load('roles', 'created_by');
+        $teams = Team::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.users.edit', compact('roles', 'user'));
+        $user->load('roles', 'team');
+
+        return view('admin.users.edit', compact('roles', 'teams', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -118,7 +120,7 @@ class UsersController extends Controller
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user->load('roles', 'created_by', 'assignedToAssets', 'assignedUserAssetsHistories', 'createdByUsers', 'userUserAlerts');
+        $user->load('roles', 'team', 'userUserAlerts');
 
         return view('admin.users.show', compact('user'));
     }
