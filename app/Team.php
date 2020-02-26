@@ -18,8 +18,16 @@ class Team extends Model
     ];
 
     protected $fillable = [
+        'name',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        Team::observe(new \App\Observers\TeamActionObserver);
+    }
 }

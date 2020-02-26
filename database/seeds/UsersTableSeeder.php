@@ -12,11 +12,11 @@ class UsersTableSeeder extends Seeder
                 'id'                 => 1,
                 'name'               => 'Admin',
                 'email'              => 'admin@admin.com',
-                'password'           => '$2y$10$cd8/PXH6jutoSB6EIvWeZ.yxcH89XQqHjcFnZCKTrA2SZq6Oti4IK',
+                'password'           => '$2y$10$7/.U8geMzZkADhr/QFZ1WeRF7VdTg9szu89nsc8L5Dh2zzplri7S2',
                 'remember_token'     => null,
                 'approved'           => 1,
                 'verified'           => 1,
-                'verified_at'        => '2020-02-24 17:18:18',
+                'verified_at'        => '2020-02-25 07:59:22',
                 'verification_token' => '',
             ],
         ];

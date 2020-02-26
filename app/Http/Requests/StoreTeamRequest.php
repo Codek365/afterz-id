@@ -19,6 +19,8 @@ class StoreTeamRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => [
+                'required'],
         ];
     }
 }
