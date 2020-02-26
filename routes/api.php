@@ -12,10 +12,4 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Teams
     Route::apiResource('teams', 'TeamApiController');
-
-    // Faq Categories
-    Route::apiResource('faq-categories', 'FaqCategoryApiController');
-
-    // Faq Questions
-    Route::apiResource('faq-questions', 'FaqQuestionApiController');
 });

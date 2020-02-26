@@ -74,91 +74,23 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '17',
-                'title' => 'user_alert_create',
-            ],
-            [
-                'id'    => '18',
-                'title' => 'user_alert_show',
-            ],
-            [
-                'id'    => '19',
-                'title' => 'user_alert_delete',
-            ],
-            [
-                'id'    => '20',
-                'title' => 'user_alert_access',
-            ],
-            [
-                'id'    => '21',
-                'title' => 'audit_log_show',
-            ],
-            [
-                'id'    => '22',
-                'title' => 'audit_log_access',
-            ],
-            [
-                'id'    => '23',
                 'title' => 'team_create',
             ],
             [
-                'id'    => '24',
+                'id'    => '18',
                 'title' => 'team_edit',
             ],
             [
-                'id'    => '25',
+                'id'    => '19',
                 'title' => 'team_show',
             ],
             [
-                'id'    => '26',
+                'id'    => '20',
                 'title' => 'team_delete',
             ],
             [
-                'id'    => '27',
+                'id'    => '21',
                 'title' => 'team_access',
-            ],
-            [
-                'id'    => '28',
-                'title' => 'faq_management_access',
-            ],
-            [
-                'id'    => '29',
-                'title' => 'faq_category_create',
-            ],
-            [
-                'id'    => '30',
-                'title' => 'faq_category_edit',
-            ],
-            [
-                'id'    => '31',
-                'title' => 'faq_category_show',
-            ],
-            [
-                'id'    => '32',
-                'title' => 'faq_category_delete',
-            ],
-            [
-                'id'    => '33',
-                'title' => 'faq_category_access',
-            ],
-            [
-                'id'    => '34',
-                'title' => 'faq_question_create',
-            ],
-            [
-                'id'    => '35',
-                'title' => 'faq_question_edit',
-            ],
-            [
-                'id'    => '36',
-                'title' => 'faq_question_show',
-            ],
-            [
-                'id'    => '37',
-                'title' => 'faq_question_delete',
-            ],
-            [
-                'id'    => '38',
-                'title' => 'faq_question_access',
             ],
         ];
 

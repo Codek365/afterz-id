@@ -26,13 +26,6 @@ class Team extends Model
         'deleted_at',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
-
-        Team::observe(new \App\Observers\TeamActionObserver);
-    }
-
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
