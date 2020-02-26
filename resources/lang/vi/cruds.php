@@ -131,6 +131,8 @@ return [
             'deleted_at_helper' => '',
             'name'              => 'Name',
             'name_helper'       => '',
+            'team'              => 'Team',
+            'team_helper'       => '',
         ],
     ],
     'faqManagement'  => [

@@ -37,6 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Teams
     Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
+    Route::post('teams/parse-csv-import', 'TeamController@parseCsvImport')->name('teams.parseCsvImport');
+    Route::post('teams/process-csv-import', 'TeamController@processCsvImport')->name('teams.processCsvImport');
     Route::resource('teams', 'TeamController');
 
     // Faq Categories
