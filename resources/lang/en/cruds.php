@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'userManagement' => [
+    'userManagement'    => [
         'title'          => 'User management',
         'title_singular' => 'User management',
     ],
-    'permission'     => [
+    'permission'        => [
         'title'          => 'Permissions',
         'title_singular' => 'Permission',
         'fields'         => [
@@ -21,7 +21,7 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'role'           => [
+    'role'              => [
         'title'          => 'Roles',
         'title_singular' => 'Role',
         'fields'         => [
@@ -39,7 +39,7 @@ return [
             'deleted_at_helper'  => '',
         ],
     ],
-    'user'           => [
+    'user'              => [
         'title'          => 'Users',
         'title_singular' => 'User',
         'fields'         => [
@@ -75,7 +75,7 @@ return [
             'team_helper'               => '',
         ],
     ],
-    'team'           => [
+    'team'              => [
         'title'          => 'Teams',
         'title_singular' => 'Team',
         'fields'         => [
@@ -93,7 +93,7 @@ return [
             'team_helper'       => '',
         ],
     ],
-    'auditLog'       => [
+    'auditLog'          => [
         'title'          => 'Audit Logs',
         'title_singular' => 'Audit Log',
         'fields'         => [
@@ -115,6 +115,90 @@ return [
             'created_at_helper'   => '',
             'updated_at'          => 'Updated at',
             'updated_at_helper'   => '',
+        ],
+    ],
+    'userAlert'         => [
+        'title'          => 'User Alerts',
+        'title_singular' => 'User Alert',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'alert_text'        => 'Alert Text',
+            'alert_text_helper' => '',
+            'alert_link'        => 'Alert Link',
+            'alert_link_helper' => '',
+            'user'              => 'Users',
+            'user_helper'       => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated at',
+            'updated_at_helper' => '',
+        ],
+    ],
+    'contentManagement' => [
+        'title'          => 'Content management',
+        'title_singular' => 'Content management',
+    ],
+    'contentCategory'   => [
+        'title'          => 'Categories',
+        'title_singular' => 'Category',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'name'              => 'Name',
+            'name_helper'       => '',
+            'slug'              => 'Slug',
+            'slug_helper'       => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated At',
+            'updated_at_helper' => '',
+            'deleted_at'        => 'Deleted At',
+            'deleted_at_helper' => '',
+        ],
+    ],
+    'contentTag'        => [
+        'title'          => 'Tags',
+        'title_singular' => 'Tag',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'name'              => 'Name',
+            'name_helper'       => '',
+            'slug'              => 'Slug',
+            'slug_helper'       => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated At',
+            'updated_at_helper' => '',
+            'deleted_at'        => 'Deleted At',
+            'deleted_at_helper' => '',
+        ],
+    ],
+    'contentPage'       => [
+        'title'          => 'Pages',
+        'title_singular' => 'Page',
+        'fields'         => [
+            'id'                    => 'ID',
+            'id_helper'             => '',
+            'title'                 => 'Title',
+            'title_helper'          => '',
+            'category'              => 'Categories',
+            'category_helper'       => '',
+            'tag'                   => 'Tags',
+            'tag_helper'            => '',
+            'page_text'             => 'Full Text',
+            'page_text_helper'      => '',
+            'excerpt'               => 'Excerpt',
+            'excerpt_helper'        => '',
+            'featured_image'        => 'Featured Image',
+            'featured_image_helper' => '',
+            'created_at'            => 'Created at',
+            'created_at_helper'     => '',
+            'updated_at'            => 'Updated At',
+            'updated_at_helper'     => '',
+            'deleted_at'            => 'Deleted At',
+            'deleted_at_helper'     => '',
         ],
     ],
 ];

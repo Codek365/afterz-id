@@ -11,6 +11,11 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li>
+                    <select class="searchable-field form-control">
+
+                    </select>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route("admin.home") }}" class="nav-link">
                         <p>
@@ -89,6 +94,69 @@
                                         </i>
                                         <p>
                                             <span>{{ trans('cruds.auditLog.title') }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('user_alert_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.user-alerts.index") }}" class="nav-link {{ request()->is('admin/user-alerts') || request()->is('admin/user-alerts/*') ? 'active' : '' }}">
+                            <i class="fa-fw fas fa-bell">
+
+                            </i>
+                            <p>
+                                <span>{{ trans('cruds.userAlert.title') }}</span>
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('content_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/content-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/content-tags*') ? 'menu-open' : '' }} {{ request()->is('admin/content-pages*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw fas fa-book">
+
+                            </i>
+                            <p>
+                                <span>{{ trans('cruds.contentManagement.title') }}</span>
+                                <i class="right fa fa-fw fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('content_category_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.content-categories.index") }}" class="nav-link {{ request()->is('admin/content-categories') || request()->is('admin/content-categories/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-folder">
+
+                                        </i>
+                                        <p>
+                                            <span>{{ trans('cruds.contentCategory.title') }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('content_tag_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.content-tags.index") }}" class="nav-link {{ request()->is('admin/content-tags') || request()->is('admin/content-tags/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-tags">
+
+                                        </i>
+                                        <p>
+                                            <span>{{ trans('cruds.contentTag.title') }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('content_page_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.content-pages.index") }}" class="nav-link {{ request()->is('admin/content-pages') || request()->is('admin/content-pages/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-file">
+
+                                        </i>
+                                        <p>
+                                            <span>{{ trans('cruds.contentPage.title') }}</span>
                                         </p>
                                     </a>
                                 </li>
