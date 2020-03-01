@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'azCrm',
+    'site_title' => 'afterz-id',
 ];

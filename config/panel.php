@@ -1,11 +1,10 @@
 <?php
 
 return [
-    'date_format'               => 'Y-m-d',
+    'date_format'               => 'd/m/Y',
     'time_format'               => 'H:i:s',
-    'primary_language'          => 'vi',
+    'primary_language'          => 'en',
     'available_languages'       => [
-        'vi' => 'Vietnamese',
         'en' => 'English',
     ],
     'registration_default_role' => '2',

@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Notifications\VerifyUserNotification;
-use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -16,7 +15,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, MultiTenantModelTrait, Notifiable, HasApiTokens;
+    use SoftDeletes, Notifiable, HasApiTokens;
 
     public $table = 'users';
 
@@ -38,7 +37,6 @@ class User extends Authenticatable
         'email',
         'team_id',
         'password',
-        'approved',
         'verified',
         'created_at',
         'updated_at',
@@ -83,6 +81,11 @@ class User extends Authenticatable
                 $user->notify(new VerifyUserNotification($user));
             }
         });
+    }
+
+    public function userUserAlerts()
+    {
+        return $this->belongsToMany(UserAlert::class);
     }
 
     public function getEmailVerifiedAtAttribute($value)

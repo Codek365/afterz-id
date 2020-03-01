@@ -20,8 +20,7 @@ class UpdatePermissionRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
-            ],
+                'required'],
         ];
     }
 }

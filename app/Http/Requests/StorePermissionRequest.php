@@ -20,8 +20,7 @@ class StorePermissionRequest extends FormRequest
     {
         return [
             'title' => [
-                'required',
-            ],
+                'required'],
         ];
     }
 }

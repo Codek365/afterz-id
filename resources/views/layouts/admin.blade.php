@@ -48,6 +48,36 @@
                     </li>
                 </ul>
             @endif
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown notifications-menu">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <i class="far fa-bell"></i>
+                        @php($alertsCount = \Auth::user()->userUserAlerts()->where('read', false)->count())
+                            @if($alertsCount > 0)
+                                <span class="badge badge-warning navbar-badge">
+                                    {{ $alertsCount }}
+                                </span>
+                            @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        @if(count($alerts = \Auth::user()->userUserAlerts()->withPivot('read')->limit(10)->orderBy('created_at', 'ASC')->get()->reverse()) > 0)
+                            @foreach($alerts as $alert)
+                                <div class="dropdown-item">
+                                    <a href="{{ $alert->alert_link ? $alert->alert_link : "#" }}" target="_blank" rel="noopener noreferrer">
+                                        @if($alert->pivot->read === 0) <strong> @endif
+                                            {{ $alert->alert_text }}
+                                            @if($alert->pivot->read === 0) </strong> @endif
+                                    </a>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="text-center">
+                                {{ trans('global.no_alerts') }}
+                            </div>
+                        @endif
+                    </div>
+                </li>
+            </ul>
 
         </nav>
 
@@ -120,8 +150,7 @@
   let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
 
   let languages = {
-    'vi': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Vietnamese.json',
-        'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
+    'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
   };
 
   $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
@@ -215,6 +244,17 @@
   });
 
   $.fn.dataTable.ext.classes.sPageButton = '';
+});
+
+    </script>
+    <script>
+        $(document).ready(function () {
+    $(".notifications-menu").on('click', function () {
+        if (!$(this).hasClass('open')) {
+            $('.notifications-menu .label-warning').hide();
+            $.get('/admin/user-alerts/read');
+        }
+    });
 });
 
     </script>

@@ -23,9 +23,4 @@ class Permission extends Model
         'updated_at',
         'deleted_at',
     ];
-
-    public function permissionsRoles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
 }
