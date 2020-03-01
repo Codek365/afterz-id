@@ -92,6 +92,14 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '21',
                 'title' => 'team_access',
             ],
+            [
+                'id'    => '22',
+                'title' => 'audit_log_show',
+            ],
+            [
+                'id'    => '23',
+                'title' => 'audit_log_access',
+            ],
         ];
 
         Permission::insert($permissions);
