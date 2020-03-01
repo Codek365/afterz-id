@@ -100,6 +100,86 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '23',
                 'title' => 'audit_log_access',
             ],
+            [
+                'id'    => '24',
+                'title' => 'user_alert_create',
+            ],
+            [
+                'id'    => '25',
+                'title' => 'user_alert_show',
+            ],
+            [
+                'id'    => '26',
+                'title' => 'user_alert_delete',
+            ],
+            [
+                'id'    => '27',
+                'title' => 'user_alert_access',
+            ],
+            [
+                'id'    => '28',
+                'title' => 'content_management_access',
+            ],
+            [
+                'id'    => '29',
+                'title' => 'content_category_create',
+            ],
+            [
+                'id'    => '30',
+                'title' => 'content_category_edit',
+            ],
+            [
+                'id'    => '31',
+                'title' => 'content_category_show',
+            ],
+            [
+                'id'    => '32',
+                'title' => 'content_category_delete',
+            ],
+            [
+                'id'    => '33',
+                'title' => 'content_category_access',
+            ],
+            [
+                'id'    => '34',
+                'title' => 'content_tag_create',
+            ],
+            [
+                'id'    => '35',
+                'title' => 'content_tag_edit',
+            ],
+            [
+                'id'    => '36',
+                'title' => 'content_tag_show',
+            ],
+            [
+                'id'    => '37',
+                'title' => 'content_tag_delete',
+            ],
+            [
+                'id'    => '38',
+                'title' => 'content_tag_access',
+            ],
+            [
+                'id'    => '39',
+                'title' => 'content_page_create',
+            ],
+            [
+                'id'    => '40',
+                'title' => 'content_page_edit',
+            ],
+            [
+                'id'    => '41',
+                'title' => 'content_page_show',
+            ],
+            [
+                'id'    => '42',
+                'title' => 'content_page_delete',
+            ],
+            [
+                'id'    => '43',
+                'title' => 'content_page_access',
+            ],
         ];
 
         Permission::insert($permissions);
