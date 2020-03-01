@@ -13,3 +13,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+after.sh
+aliases
+vagrant-halt.bat
+vagrant-reload.bat
+vagrant-up.bat
